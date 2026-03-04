@@ -3,7 +3,10 @@ $(function () {
   $(document).on('click', '.blockr-pipeline-chip', function () {
     var blockId = $(this).data('block-id');
     if (blockId) {
-      Shiny.setInputValue('pipeline_chip_click', {
+      // Extract namespace from pipeline bar parent ID (e.g. "ns-pipeline_bar")
+      var barId = $(this).closest('.blockr-pipeline-bar').attr('id') || '';
+      var ns = barId.replace(/pipeline_bar$/, '');
+      Shiny.setInputValue(ns + 'pipeline_chip_click', {
         id: blockId,
         nonce: Math.random()
       });

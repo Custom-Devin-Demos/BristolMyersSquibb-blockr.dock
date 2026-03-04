@@ -396,7 +396,7 @@ pipeline_chip_icon <- function(category) {
   switch(
     category,
     input = paste0(
-      "<svg viewBox='0 0 16 16' fill='currentColor'>",
+      "<svg viewBox='0 0 16 16' fill='currentColor' width='14' height='14'>",
       "<path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-.5.5h-3",
       "a.5.5 0 0 1-.5-.5V6a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 ",
       "0 0 0 1 6v6a1.5 1.5 0 0 0 1.5 1.5h3A1.5 1.5 0 0 0 7 ",
@@ -409,7 +409,7 @@ pipeline_chip_icon <- function(category) {
       "</svg>"
     ),
     transform = paste0(
-      "<svg viewBox='0 0 16 16' fill='currentColor'>",
+      "<svg viewBox='0 0 16 16' fill='currentColor' width='14' height='14'>",
       "<path fill-rule='evenodd' d='M1 11.5a.5.5 0 0 0 ",
       ".5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a",
       ".5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 ",
@@ -419,7 +419,7 @@ pipeline_chip_icon <- function(category) {
       "0 0 1 .5.5z'/></svg>"
     ),
     plot = paste0(
-      "<svg viewBox='0 0 16 16' fill='currentColor'>",
+      "<svg viewBox='0 0 16 16' fill='currentColor' width='14' height='14'>",
       "<path d='M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5h-2v12h2",
       "V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 ",
       "0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1",
@@ -428,7 +428,7 @@ pipeline_chip_icon <- function(category) {
       "1H2a1 1 0 0 1-1-1v-3z'/></svg>"
     ),
     output = paste0(
-      "<svg viewBox='0 0 16 16' fill='currentColor'>",
+      "<svg viewBox='0 0 16 16' fill='currentColor' width='14' height='14'>",
       "<path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 ",
       "1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 ",
       "0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z'/>",
@@ -437,7 +437,7 @@ pipeline_chip_icon <- function(category) {
       "L5.354 8.146a.5.5 0 1 0-.708.708l3 3z'/></svg>"
     ),
     paste0(
-      "<svg viewBox='0 0 16 16' fill='currentColor'>",
+      "<svg viewBox='0 0 16 16' fill='currentColor' width='14' height='14'>",
       "<path d='M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1",
       ".34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698",
       "-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-",
@@ -475,15 +475,20 @@ build_pipeline_ui <- function(blocks, links, error_ids = character()) {
 
   blk_ids <- names(blocks)
 
-  # Build adjacency from links
+  # Build adjacency from links (links is a vctrs_rcrd object)
   edges <- list()
   targets <- character()
-  for (lnk in links) {
-    from_id <- lnk[["from"]]
-    to_id <- lnk[["to"]]
-    if (from_id %in% blk_ids && to_id %in% blk_ids) {
-      edges[[length(edges) + 1L]] <- list(from = from_id, to = to_id)
-      targets <- c(targets, to_id)
+  n_links <- length(links)
+  if (n_links > 0L) {
+    from_vec <- vctrs::field(links, "from")
+    to_vec <- vctrs::field(links, "to")
+    for (j in seq_len(n_links)) {
+      from_id <- from_vec[j]
+      to_id <- to_vec[j]
+      if (from_id %in% blk_ids && to_id %in% blk_ids) {
+        edges[[length(edges) + 1L]] <- list(from = from_id, to = to_id)
+        targets <- c(targets, to_id)
+      }
     }
   }
 
