@@ -65,6 +65,7 @@ block_modal <- function(ns, board, mode = c("append", "add", "prepend")) {
   # Collapsible advanced options section
   advanced_section <- div(
     id = ns("block-advanced-options"),
+    class = "blockr-advanced-options",
     tagList(advanced_fields)
   )
 
@@ -142,6 +143,7 @@ link_modal <- function(ns, board, block_id) {
 
   advanced_section <- div(
     id = ns("link-advanced-options"),
+    class = "blockr-advanced-options",
     tagList(advanced_fields)
   )
 
@@ -273,6 +275,7 @@ stack_modal <- function(
     # Collapsible advanced options section
     advanced_section <- div(
       id = ns("stack-advanced-options"),
+      class = "blockr-advanced-options",
       tagList(advanced_fields)
     )
   }

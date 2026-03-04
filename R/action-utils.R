@@ -192,25 +192,6 @@ board_select <- function(id, blocks, selected = NULL, ...) {
 
   tagList(
     css_block_selectize(),
-    tags$style(
-      HTML(
-        "/* Style the remove button */
-        .selectize-input .remove {
-          text-decoration: none !important;
-          color: #6c757d !important;
-          font-weight: normal !important;
-          border: none !important;
-          margin-left: 8px !important;
-          padding: 2px 6px !important;
-          border-radius: 3px !important;
-          transition: background-color 0.2s ease, color 0.2s ease;
-        }
-        .selectize-input .remove:hover {
-          background-color: rgba(108, 117, 125, 0.1) !important;
-          color: #495057 !important;
-        }"
-      )
-    ),
     selectizeInput(
       id,
       ...,

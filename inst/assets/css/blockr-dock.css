@@ -91,14 +91,14 @@
   height: auto;
   width: auto;
   min-width: 150px;
-  border: 2px dashed #bbb;
+  border: 2px dashed var(--blockr-color-text-subtle);
   border-radius: 8px;
-  background: white;
+  background: var(--bs-body-bg, #ffffff);
   box-shadow: none;
 }
 
 .blockr-title-edit .form-control:focus {
-  border-color: #aaa;
+  border-color: var(--blockr-color-border-hover);
   box-shadow: none;
   outline: none;
 }
@@ -481,7 +481,7 @@ label:has(input[type="file"]) {
 .offcanvas-body {
   font-size: var(--blockr-font-size-sm);
   padding: 20px;
-  background: #ffffff;
+  background: var(--bs-body-bg, #ffffff);
 }
 
 .offcanvas .accordion {
@@ -531,7 +531,7 @@ label:has(input[type="file"]) {
    Tooltip & Popover Styling (Figma-aligned)
    ============================================ */
 .tooltip {
-  --bs-tooltip-bg: white;
+  --bs-tooltip-bg: var(--bs-body-bg, #ffffff);
   --bs-tooltip-color: var(--blockr-color-text-secondary);
   --bs-tooltip-opacity: 1;
 }
@@ -548,13 +548,13 @@ label:has(input[type="file"]) {
 }
 
 .tooltip-arrow::before {
-  border-top-color: white !important;
-  border-bottom-color: white !important;
+  border-top-color: var(--bs-body-bg, #ffffff) !important;
+  border-bottom-color: var(--bs-body-bg, #ffffff) !important;
 }
 
 /* Popover - light style matching tooltips */
 .popover {
-  --bs-popover-bg: white;
+  --bs-popover-bg: var(--bs-body-bg, #ffffff);
   --bs-popover-border-color: var(--blockr-color-border);
   --bs-popover-body-color: var(--blockr-color-text-secondary);
   border-radius: 12px;
@@ -579,8 +579,8 @@ label:has(input[type="file"]) {
 }
 
 .popover-arrow::after {
-  border-top-color: white !important;
-  border-bottom-color: white !important;
+  border-top-color: var(--bs-body-bg, #ffffff) !important;
+  border-bottom-color: var(--bs-body-bg, #ffffff) !important;
 }
 
 /* ============================================
@@ -722,8 +722,8 @@ label:has(input[type="file"]) {
   gap: 8px;
   height: 48px;
   padding: 0 16px;
-  background-color: white;
-  border-bottom: 1px solid var(--blockr-grey-300);
+  background-color: var(--bs-body-bg, #ffffff);
+  border-bottom: 1px solid var(--blockr-color-border-hover);
 }
 
 .blockr-navbar-left {
@@ -757,4 +757,372 @@ label:has(input[type="file"]) {
 .blockr-navbar-icon-btn:hover {
   background-color: var(--blockr-grey-300);
   color: var(--blockr-color-text-secondary);
+}
+
+/* ============================================
+   Block Card Styles (extracted from inline)
+   ============================================ */
+
+/* Card title line-height */
+.blockr-card-title {
+  line-height: 1.0;
+}
+
+/* Title display - editable click-to-rename area */
+.blockr-title-display {
+  padding: 4px 8px;
+  margin: -4px -8px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px dashed transparent;
+  transition: border-color 0.15s ease;
+}
+
+.blockr-title-display:hover {
+  border-color: var(--blockr-color-border-hover);
+}
+
+.blockr-title-display:hover .edit-icon {
+  opacity: 1 !important;
+}
+
+/* Edit icon on title */
+.blockr-edit-icon {
+  opacity: 0;
+  font-size: 0.7em;
+  color: var(--blockr-color-text-subtle);
+  transition: opacity 0.15s ease;
+}
+
+/* Title edit mode - hidden by default */
+.blockr-title-edit-wrapper {
+  display: none;
+}
+
+/* Dropdown action items */
+.blockr-dd-action {
+  padding-left: 2.5rem;
+}
+
+/* Dropdown menu min-width */
+.blockr-block-dropdown {
+  min-width: 250px;
+}
+
+/* Block ID code element */
+.blockr-blk-id-code {
+  font-size: var(--blockr-font-size-sm);
+}
+
+/* Copy button in dropdown */
+.blockr-copy-btn {
+  line-height: 1;
+  text-decoration: none;
+}
+
+/* Check icon hidden by default */
+.blockr-check-icon {
+  display: none;
+}
+
+/* Accordion panel - no border, no radius */
+.blockr-accordion-panel {
+  border: none;
+  border-radius: 0;
+}
+
+/* Accordion header hidden */
+.blockr-accordion-header-hidden {
+  display: none;
+}
+
+/* Inputs accordion body */
+.blockr-inputs-body {
+  background-color: var(--bs-body-bg, #ffffff);
+  border-radius: 0;
+  margin: 0 -16px 10px -16px;
+  padding: 16px 16px 10px 16px;
+  border-top: 1px solid var(--blockr-grey-300);
+  border-bottom: 1px solid var(--blockr-grey-300);
+}
+
+/* Outputs accordion body */
+.blockr-outputs-body {
+  padding: 0;
+}
+
+/* Outputs panel overflow */
+.blockr-outputs-panel {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* ============================================
+   Modal Styles (extracted from css_modal)
+   ============================================ */
+#shiny-modal .modal-header {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--blockr-color-border);
+}
+
+#shiny-modal .modal-title {
+  font-size: 1.125rem;
+  font-weight: var(--blockr-font-weight-semibold);
+  margin: 0;
+}
+
+#shiny-modal .modal-body {
+  padding: 20px;
+}
+
+#shiny-modal .modal-body .form-group {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+#shiny-modal .modal-body .selectize-input,
+#shiny-modal .modal-body input[type='text'] {
+  width: 100%;
+}
+
+#shiny-modal .modal-body .shiny-input-container {
+  width: 100%;
+}
+
+#shiny-modal .modal-body .control-label {
+  font-size: var(--blockr-font-size-base);
+  color: var(--blockr-color-text-muted);
+  margin-bottom: 4px;
+  font-weight: var(--blockr-font-weight-normal);
+}
+
+#shiny-modal .modal-footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--blockr-color-border);
+  gap: 8px;
+}
+
+#shiny-modal .modal-footer .btn {
+  font-size: var(--blockr-font-size-base);
+  padding: 0.375rem 0.75rem;
+}
+
+/* ============================================
+   Modal Advanced Options (extracted from css_modal_advanced)
+   ============================================ */
+.blockr-advanced-options {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.blockr-advanced-options.expanded {
+  max-height: 500px;
+  overflow: visible;
+  transition: max-height 0.5s ease-in;
+}
+
+.modal-advanced-toggle {
+  cursor: pointer;
+  user-select: none;
+  padding: 8px 0;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--blockr-color-text-muted);
+  font-size: var(--blockr-font-size-base);
+}
+
+.modal-chevron {
+  transition: transform 0.2s;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.modal-chevron.rotated {
+  transform: rotate(90deg);
+}
+
+/* ============================================
+   Block Selectize Dropdown (extracted from css_block_selectize)
+   ============================================ */
+.selectize-dropdown-content {
+  max-height: 450px !important;
+  padding: 8px 0;
+}
+
+.block-option {
+  padding: 16px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.15s ease;
+}
+
+.block-icon-wrapper {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background-color: var(--blockr-icon-bg, transparent);
+}
+
+.block-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.block-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.block-name {
+  font-weight: var(--blockr-font-weight-semibold);
+  font-size: 15px;
+  color: var(--blockr-color-text-primary);
+  flex: 1;
+}
+
+.block-desc {
+  font-size: var(--blockr-font-size-sm);
+  color: var(--blockr-color-text-muted);
+  line-height: 1.4;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.selectize-dropdown .block-option {
+  border-bottom: 1px solid var(--blockr-grey-100);
+}
+
+.selectize-dropdown .block-option:last-child {
+  border-bottom: none;
+}
+
+.selectize-dropdown .block-option:hover,
+.selectize-dropdown .block-option.active {
+  background-color: var(--blockr-color-bg-hover);
+}
+
+.selectize-input .remove {
+  text-decoration: none !important;
+  color: var(--blockr-color-text-muted) !important;
+  font-weight: var(--blockr-font-weight-normal) !important;
+  border: none !important;
+  margin-left: 8px !important;
+  padding: 2px 6px !important;
+  border-radius: 3px !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.selectize-input .remove:hover {
+  background-color: rgba(108, 117, 125, 0.1) !important;
+  color: var(--blockr-color-text-secondary) !important;
+}
+
+/* Selectize item container (selected block chip) */
+.blockr-selectize-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background-color: var(--blockr-color-bg-subtle);
+  border-radius: 6px;
+  border: 1px solid var(--blockr-color-border);
+}
+
+.blockr-selectize-item-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: var(--blockr-icon-bg, transparent);
+}
+
+.blockr-selectize-item-name {
+  font-weight: var(--blockr-font-weight-medium);
+  font-size: var(--blockr-font-size-base);
+}
+
+.blockr-selectize-item .badge-two-tone {
+  margin-left: 4px;
+}
+
+/* Confirm button wrapper */
+.blockr-confirm-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+/* Smooth accordion expand/collapse */
+.blockr-block-card .accordion-collapse {
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.blockr-block-card .accordion-collapse.collapsing {
+  transition: height 0.3s ease;
+}
+
+/* Hover lift on block cards */
+.blockr-block-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blockr-block-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Fade-in for newly added blocks */
+@keyframes blockr-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.blockr-block-card {
+  animation: blockr-fade-in 0.3s ease-out;
+}
+
+/* ============================================
+   Description Truncation Fix
+   ============================================ */
+.blockr-subtitle {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: block;
+}
+
+.popover-body .block-desc,
+.popover-body p {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }

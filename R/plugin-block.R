@@ -42,8 +42,7 @@ block_card_title <- function(block, id, info) {
   div(
     class = "flex-grow-1 pe-3",
     div(
-      class = "card-title mb-0",
-      style = "line-height: 1.0;",
+      class = "card-title mb-0 blockr-card-title",
       # Inline editable title container
       div(
         class = "blockr-inline-edit",
@@ -52,22 +51,6 @@ block_card_title <- function(block, id, info) {
           id = ns("title_display"),
           class = "blockr-title-display d-inline-flex align-items-center gap-2",
           title = "Click to rename",
-          style = paste(
-            "padding: 4px 8px;",
-            "margin: -4px -8px;",
-            "border-radius: 4px;",
-            "cursor: pointer;",
-            "border: 2px dashed transparent;",
-            "transition: border-color 0.15s ease;"
-          ),
-          onmouseover = paste0(
-            "this.style.borderColor='#ddd';",
-            "this.querySelector('.edit-icon').style.opacity='1';"
-          ),
-          onmouseout = paste0(
-            "this.style.borderColor='transparent';",
-            "this.querySelector('.edit-icon').style.opacity='0';"
-          ),
           onclick = sprintf(
             paste0(
               "this.style.display='none';",
@@ -82,20 +65,13 @@ block_card_title <- function(block, id, info) {
           uiOutput(ns("block_name_out"), inline = TRUE),
           icon(
             "pen-to-square",
-            class = "edit-icon",
-            style = paste(
-              "opacity: 0;",
-              "font-size: 0.7em;",
-              "color: #bbb;",
-              "transition: opacity 0.15s ease;"
-            )
+            class = "edit-icon blockr-edit-icon"
           )
         ),
         # Edit mode - hidden by default
         div(
           id = ns("title_edit"),
-          class = "blockr-title-edit",
-          style = "display: none;",
+          class = "blockr-title-edit blockr-title-edit-wrapper",
           textInput(
             input_id,
             label = NULL,
@@ -177,7 +153,7 @@ block_card_dropdown <- function(ns, info, blk_id) {
   dd_action <- function(title, id, symbol, class = character()) {
 
     cls <- c(
-      "dropdown-item action-button py-2 position-relative",
+      "dropdown-item action-button py-2 position-relative blockr-dd-action",
       class
     )
 
@@ -186,7 +162,6 @@ block_card_dropdown <- function(ns, info, blk_id) {
         class = cls,
         type = "button",
         id = id,
-        style = "padding-left: 2.5rem;",
         if (not_null(symbol)) {
           span(
             class = "position-absolute start-0 top-50 translate-middle-y ms-3",
@@ -226,7 +201,6 @@ block_card_dropdown <- function(ns, info, blk_id) {
         "dropdown-menu dropdown-menu-end blockr-block-dropdown",
         "shadow-sm rounded-3 border-1"
       ),
-      style = "min-width: 250px;",
       if (!is_dock_locked()) {
         tagList(
           dd_header("Block Actions"),
@@ -260,11 +234,10 @@ block_card_dropdown <- function(ns, info, blk_id) {
               class = "d-flex align-items-center gap-2",
               tags$code(
                 blk_id,
-                style = "font-size: var(--blockr-font-size-sm);"
+                class = "blockr-blk-id-code"
               ),
               tags$button(
-                class = "btn btn-link p-0 border-0 text-muted",
-                style = "line-height: 1; text-decoration: none;",
+                class = "btn btn-link p-0 border-0 text-muted blockr-copy-btn",
                 onclick = sprintf(
                   paste0(
                     "event.stopPropagation(); ",
@@ -273,7 +246,7 @@ block_card_dropdown <- function(ns, info, blk_id) {
                     "var copyIcon = btn.querySelector('.copy-icon'); ",
                     "var checkIcon = btn.querySelector('.check-icon'); ",
                     "copyIcon.style.display = 'none'; ",
-                    "checkIcon.style.display = ''; ",
+                    "checkIcon.style.display = 'inline'; ",
                     "setTimeout(function() { ",
                     "checkIcon.style.display = 'none'; ",
                     "copyIcon.style.display = ''; }, 1500);"
@@ -286,8 +259,7 @@ block_card_dropdown <- function(ns, info, blk_id) {
                   bsicons::bs_icon("copy", size = "0.9em")
                 ),
                 span(
-                  class = "check-icon text-success",
-                  style = "display: none;",
+                  class = "check-icon text-success blockr-check-icon",
                   bsicons::bs_icon("check", size = "0.9em")
                 )
               )
@@ -310,46 +282,44 @@ block_card_content <- function(ns, expr_ui, block_ui) {
   )$find(
     ".accordion-header"
   )$addAttrs(
-    style = "display: none;"
+    class = "accordion-header blockr-accordion-header-hidden"
   )$reset(
   )$find(
     ".accordion-body"
   )$addAttrs(
-    style = paste0(
-      "background-color: white;",
-      "border-radius: 0;",
-      "margin: 0 -16px 10px -16px;",
-      "padding: 16px 16px 10px 16px;",
-      "border-top: 1px solid var(--blockr-grey-300);",
-      "border-bottom: 1px solid var(--blockr-grey-300);"
-    )
+    class = "accordion-body blockr-inputs-body"
   )$append(
     expr_ui
   )$allTags()
 
-  inputs_panel$attribs$style <- "border: none; border-radius: 0;"
+  inputs_panel$attribs$class <- paste(
+    coal(inputs_panel$attribs$class, ""),
+    "blockr-accordion-panel"
+  )
 
   outputs_panel <- htmltools::tagQuery(
     accordion_panel(
       icon = icon("chart-simple"),
       title = "Block output(s)",
-      value = "outputs",
-      style = "max-width: 100%; overflow-x: auto;"
+      value = "outputs"
     )
   )$find(
     ".accordion-header"
   )$addAttrs(
-    style = "display: none;"
+    class = "accordion-header blockr-accordion-header-hidden"
   )$reset(
   )$find(
     ".accordion-body"
   )$addAttrs(
-    style = "padding: 0;"
+    class = "accordion-body blockr-outputs-body"
   )$append(
     tagList(block_ui, div(id = ns("outputs_issues_wrapper")))
   )$allTags()
 
-  outputs_panel$attribs$style <- "border: none; border-radius: 0;"
+  outputs_panel$attribs$class <- paste(
+    coal(outputs_panel$attribs$class, ""),
+    "blockr-accordion-panel blockr-outputs-panel"
+  )
 
   tagList(
     div(id = ns("errors_block"), class = "mt-4"),
