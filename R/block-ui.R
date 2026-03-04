@@ -34,8 +34,8 @@ block_card <- function(blk, blk_id, plugin, board, board_ns) {
   }
 
   card_tag <- div(
-    class = "card",
-    width = "100%",
+    class = "card blockr-block-card",
+    width = "100%", 
     id = board_ns(as_block_handle_id(blk_id)),
     edit_ui(
       edit_ns,
