@@ -65,6 +65,8 @@ manage_dock <- function(board, update, actions, session = get_session()) {
           )
         }
       }
+
+      send_connection_lines(board$board, session)
     },
     once = TRUE
   )
@@ -207,6 +209,11 @@ manage_dock <- function(board, update, actions, session = get_session()) {
     }
   )
 
+  observe({
+    board$board
+    send_connection_lines(board$board, session)
+  })
+
   list(
     layout = reactive(dockViewR::get_dock(dock)),
     proxy = dock,
@@ -318,6 +325,32 @@ suggest_panels_to_add <- function(dock, board, suggest_new = FALSE,
   } else {
     notify("No further panels can be added. Remove some panels first.")
   }
+}
+
+send_connection_lines <- function(board, session) {
+  lnks <- board_links(board)
+  blks <- board_blocks(board)
+
+  links_data <- lapply(as.list(lnks), function(lnk) {
+    list(
+      from = lnk[["from"]],
+      to = lnk[["to"]]
+    )
+  })
+
+  meta_data <- list()
+  for (blk_id in names(blks)) {
+    meta <- blks_metadata(blks[blk_id])
+    meta_data[[blk_id]] <- list(category = meta$category)
+  }
+
+  session$sendCustomMessage(
+    "update-connection-lines",
+    list(
+      links = links_data,
+      meta = meta_data
+    )
+  )
 }
 
 extension_default_icon <- function() {

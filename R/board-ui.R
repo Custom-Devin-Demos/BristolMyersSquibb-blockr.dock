@@ -12,6 +12,7 @@ board_ui.dock_board <- function(id, x, plugins = board_plugins(x),
 
   tagList(
     show_hide_block_dep(),
+    connection_lines_dep(),
     blockr_dock_dep(),
     off_canvas(
       id = NS(id, "blocks_offcanvas"),
@@ -102,5 +103,14 @@ blockr_dock_dep <- function() {
     pkg_version(),
     src = pkg_file("assets", "css"),
     stylesheet = "blockr-dock.css"
+  )
+}
+
+connection_lines_dep <- function() {
+  htmltools::htmlDependency(
+    "connection-lines",
+    pkg_version(),
+    src = pkg_file("assets", "js"),
+    script = "connection-lines.js"
   )
 }
