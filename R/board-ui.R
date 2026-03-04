@@ -13,6 +13,7 @@ board_ui.dock_board <- function(id, x, plugins = board_plugins(x),
   tagList(
     show_hide_block_dep(),
     blockr_dock_dep(),
+    pipeline_status_dep(),
     off_canvas(
       id = NS(id, "blocks_offcanvas"),
       title = "Offcanvas blocks",
@@ -34,6 +35,7 @@ board_ui.dock_board <- function(id, x, plugins = board_plugins(x),
         )
       )
     ),
+    pipeline_bar_ui(id),
     options_ui(
       id,
       options,
@@ -45,7 +47,7 @@ board_ui.dock_board <- function(id, x, plugins = board_plugins(x),
     dockViewR::dock_view_output(
       NS(id, dock_id()),
       width = "100%",
-      height = "calc(100vh - 48px)"
+      height = "calc(100vh - 88px)"
     ),
     off_canvas(
       id = NS(id, "exts_offcanvas"),
@@ -102,5 +104,25 @@ blockr_dock_dep <- function() {
     pkg_version(),
     src = pkg_file("assets", "css"),
     stylesheet = "blockr-dock.css"
+  )
+}
+
+pipeline_status_dep <- function() {
+  htmltools::htmlDependency(
+    "pipeline-status",
+    pkg_version(),
+    src = pkg_file("assets", "js"),
+    script = "pipeline-status.js"
+  )
+}
+
+pipeline_bar_ui <- function(id) {
+  div(
+    id = NS(id, "pipeline_bar"),
+    class = "blockr-pipeline-bar",
+    div(
+      class = "blockr-pipeline-scroll",
+      uiOutput(NS(id, "pipeline_chips"), inline = TRUE)
+    )
   )
 }
