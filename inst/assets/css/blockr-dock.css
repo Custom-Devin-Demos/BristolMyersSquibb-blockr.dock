@@ -56,6 +56,72 @@
   --blockr-color-primary-hover: var(--blockr-blue-700);
   --blockr-color-primary-bg: var(--blockr-blue-50);
   --blockr-color-error: #dc2626;
+
+  /* Surface colors for theme-aware inline styles */
+  --blockr-color-surface: #ffffff;
+  --blockr-color-surface-alt: #f8f9fa;
+  --blockr-color-surface-hover: #e9ecef;
+  --blockr-color-surface-input-border: #e9ecef;
+  --blockr-color-surface-divider: #f0f0f0;
+  --blockr-color-text-strong: #212529;
+  --blockr-color-text-label: #6c757d;
+  --blockr-color-modal-border: #e2e8f0;
+}
+
+/* ============================================
+   Dark Theme
+   ============================================ */
+[data-theme="dark"] {
+  /* Grey Scale - inverted for dark mode */
+  --blockr-grey-50: #1a1a2e;
+  --blockr-grey-100: #1e1e33;
+  --blockr-grey-200: #2a2a40;
+  --blockr-grey-300: #3a3a52;
+  --blockr-grey-400: #7a7a8e;
+  --blockr-grey-500: #9a9ab0;
+  --blockr-grey-600: #b0b0c4;
+  --blockr-grey-700: #c8c8d8;
+  --blockr-grey-800: #e0e0ea;
+  --blockr-grey-900: #f0f0f5;
+
+  /* Primary Blue - slightly brighter for dark bg */
+  --blockr-blue-50: #1a2744;
+  --blockr-blue-100: #1e3a5f;
+  --blockr-blue-500: #5b9bf6;
+  --blockr-blue-600: #4a8af2;
+  --blockr-blue-700: #3b7ae8;
+
+  /* Shadow - stronger for dark mode */
+  --blockr-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+  --blockr-shadow-lg: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+
+  /* Colors - Text */
+  --blockr-color-text-primary: var(--blockr-grey-900);
+  --blockr-color-text-secondary: var(--blockr-grey-700);
+  --blockr-color-text-muted: var(--blockr-grey-500);
+  --blockr-color-text-subtle: var(--blockr-grey-400);
+  --blockr-color-text-meta: var(--blockr-grey-500);
+
+  /* Colors - UI */
+  --blockr-color-border: var(--blockr-grey-200);
+  --blockr-color-border-hover: var(--blockr-grey-300);
+  --blockr-color-bg-subtle: var(--blockr-grey-50);
+  --blockr-color-bg-hover: var(--blockr-grey-100);
+  --blockr-color-bg-input: var(--blockr-grey-100);
+  --blockr-color-primary: var(--blockr-blue-500);
+  --blockr-color-primary-hover: var(--blockr-blue-600);
+  --blockr-color-primary-bg: var(--blockr-blue-50);
+  --blockr-color-error: #f87171;
+
+  /* Surface colors for theme-aware inline styles */
+  --blockr-color-surface: #16162a;
+  --blockr-color-surface-alt: #1e1e33;
+  --blockr-color-surface-hover: #2a2a40;
+  --blockr-color-surface-input-border: #2a2a40;
+  --blockr-color-surface-divider: #2a2a40;
+  --blockr-color-text-strong: #f0f0f5;
+  --blockr-color-text-label: #9a9ab0;
+  --blockr-color-modal-border: #2a2a40;
 }
 
 /* ============================================
@@ -91,14 +157,14 @@
   height: auto;
   width: auto;
   min-width: 150px;
-  border: 2px dashed #bbb;
+  border: 2px dashed var(--blockr-grey-300);
   border-radius: 8px;
-  background: white;
+  background: var(--blockr-color-surface);
   box-shadow: none;
 }
 
 .blockr-title-edit .form-control:focus {
-  border-color: #aaa;
+  border-color: var(--blockr-grey-400);
   box-shadow: none;
   outline: none;
 }
@@ -313,7 +379,7 @@ label:has(input[type="file"]) {
 
 .form-control:focus,
 .form-select:focus {
-  background-color: #ffffff;
+  background-color: var(--blockr-color-surface);
   border-color: var(--blockr-color-primary);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   outline: none;
@@ -352,7 +418,7 @@ label:has(input[type="file"]) {
 }
 
 .selectize-input.focus {
-  background-color: #ffffff !important;
+  background-color: var(--blockr-color-surface) !important;
   border-color: var(--blockr-color-primary) !important;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
 }
@@ -481,7 +547,7 @@ label:has(input[type="file"]) {
 .offcanvas-body {
   font-size: var(--blockr-font-size-sm);
   padding: 20px;
-  background: #ffffff;
+  background: var(--blockr-color-surface);
 }
 
 .offcanvas .accordion {
@@ -531,7 +597,7 @@ label:has(input[type="file"]) {
    Tooltip & Popover Styling (Figma-aligned)
    ============================================ */
 .tooltip {
-  --bs-tooltip-bg: white;
+  --bs-tooltip-bg: var(--blockr-color-surface);
   --bs-tooltip-color: var(--blockr-color-text-secondary);
   --bs-tooltip-opacity: 1;
 }
@@ -548,13 +614,13 @@ label:has(input[type="file"]) {
 }
 
 .tooltip-arrow::before {
-  border-top-color: white !important;
-  border-bottom-color: white !important;
+  border-top-color: var(--blockr-color-surface) !important;
+  border-bottom-color: var(--blockr-color-surface) !important;
 }
 
 /* Popover - light style matching tooltips */
 .popover {
-  --bs-popover-bg: white;
+  --bs-popover-bg: var(--blockr-color-surface);
   --bs-popover-border-color: var(--blockr-color-border);
   --bs-popover-body-color: var(--blockr-color-text-secondary);
   border-radius: 12px;
@@ -579,8 +645,8 @@ label:has(input[type="file"]) {
 }
 
 .popover-arrow::after {
-  border-top-color: white !important;
-  border-bottom-color: white !important;
+  border-top-color: var(--blockr-color-surface) !important;
+  border-bottom-color: var(--blockr-color-surface) !important;
 }
 
 /* ============================================
@@ -722,7 +788,7 @@ label:has(input[type="file"]) {
   gap: 8px;
   height: 48px;
   padding: 0 16px;
-  background-color: white;
+  background-color: var(--blockr-color-surface);
   border-bottom: 1px solid var(--blockr-grey-300);
 }
 
@@ -757,4 +823,266 @@ label:has(input[type="file"]) {
 .blockr-navbar-icon-btn:hover {
   background-color: var(--blockr-grey-300);
   color: var(--blockr-color-text-secondary);
+}
+
+/* ============================================
+   Theme Toggle
+   ============================================ */
+.blockr-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--blockr-color-text-muted);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.blockr-theme-toggle:hover {
+  background-color: var(--blockr-grey-300);
+  color: var(--blockr-color-text-secondary);
+}
+
+.blockr-theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.blockr-theme-toggle:hover svg {
+  transform: rotate(15deg);
+}
+
+/* ============================================
+   Dark mode overrides for Bootstrap/dockview
+   ============================================ */
+[data-theme="dark"] body {
+  --bs-body-bg: var(--blockr-grey-50) !important;
+  --bs-body-color: var(--blockr-color-text-primary) !important;
+  background-color: var(--blockr-grey-50) !important;
+  color: var(--blockr-color-text-primary) !important;
+}
+
+html[data-theme="dark"] {
+  --bs-body-bg: var(--blockr-grey-50);
+  --bs-body-color: var(--blockr-color-text-primary);
+  background-color: var(--blockr-grey-50);
+  color-scheme: dark;
+}
+
+[data-theme="dark"] .offcanvas {
+  background-color: var(--blockr-color-surface) !important;
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .offcanvas-header {
+  background-color: var(--blockr-color-surface);
+}
+
+[data-theme="dark"] .card {
+  background-color: var(--blockr-color-surface);
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .accordion-item {
+  background-color: var(--blockr-color-surface);
+  color: var(--blockr-color-text-primary);
+  border-color: var(--blockr-color-border);
+}
+
+[data-theme="dark"] .accordion-button {
+  background-color: var(--blockr-color-surface);
+  color: var(--blockr-color-text-secondary);
+}
+
+[data-theme="dark"] .accordion-button:not(.collapsed) {
+  background-color: var(--blockr-color-bg-subtle);
+  color: var(--blockr-color-text-secondary);
+}
+
+[data-theme="dark"] .accordion-button::after {
+  filter: invert(0.8);
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: var(--blockr-color-surface);
+  color: var(--blockr-color-text-primary);
+  border-color: var(--blockr-color-border);
+}
+
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer {
+  border-color: var(--blockr-color-border);
+}
+
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--blockr-color-surface);
+  color: var(--blockr-color-text-primary);
+  border-color: var(--blockr-color-border);
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+  background-color: var(--blockr-color-bg-hover);
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .dropdown-divider {
+  border-color: var(--blockr-color-border);
+}
+
+[data-theme="dark"] .table {
+  --bs-table-bg: var(--blockr-color-surface);
+  --bs-table-color: var(--blockr-color-text-primary);
+  --bs-table-striped-bg: var(--blockr-grey-100);
+  --bs-table-striped-color: var(--blockr-color-text-primary);
+  --bs-table-hover-bg: var(--blockr-grey-100);
+  --bs-table-hover-color: var(--blockr-color-text-primary);
+  border-color: var(--blockr-color-border);
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .table > thead {
+  background: var(--blockr-grey-100);
+}
+
+[data-theme="dark"] .table > tbody > tr > td {
+  border-bottom-color: var(--blockr-grey-200);
+}
+
+[data-theme="dark"] .selectize-dropdown {
+  background-color: var(--blockr-color-surface) !important;
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .selectize-dropdown-content .option {
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .selectize-dropdown-content .option.active {
+  background-color: var(--blockr-color-bg-hover) !important;
+}
+
+[data-theme="dark"] .selectize-input {
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .selectize-input input {
+  color: var(--blockr-color-text-primary) !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+  background-color: var(--blockr-grey-100) !important;
+  color: var(--blockr-color-text-primary) !important;
+  border-color: var(--blockr-grey-300) !important;
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: var(--blockr-grey-400);
+}
+
+[data-theme="dark"] .selectize-control .selectize-input {
+  background-color: var(--blockr-grey-100) !important;
+  border-color: var(--blockr-grey-300) !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary,
+[data-theme="dark"] .btn-outline-primary {
+  color: var(--blockr-color-text-primary);
+  border-color: var(--blockr-grey-300);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover,
+[data-theme="dark"] .btn-outline-primary:hover {
+  background-color: var(--blockr-grey-200);
+}
+
+[data-theme="dark"] .page-link {
+  background-color: var(--blockr-color-surface);
+  color: var(--blockr-color-text-primary);
+  border-color: var(--blockr-grey-300);
+}
+
+[data-theme="dark"] .page-item.active .page-link {
+  background-color: var(--blockr-blue-600);
+  border-color: var(--blockr-blue-600);
+}
+
+[data-theme="dark"] .page-link:hover {
+  background-color: var(--blockr-grey-200);
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] label {
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .dataTables_info {
+  color: var(--blockr-color-text-muted);
+}
+
+[data-theme="dark"] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+[data-theme="dark"] .alert-warning {
+  background-color: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+[data-theme="dark"] .alert-light {
+  background-color: var(--blockr-grey-100);
+  color: var(--blockr-color-text-primary);
+  border-color: var(--blockr-color-border);
+}
+
+[data-theme="dark"] .blockr-error {
+  background-color: rgba(248, 113, 113, 0.1);
+}
+
+[data-theme="dark"] code {
+  color: #e879a0;
+  background-color: var(--blockr-grey-100);
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--blockr-color-text-muted) !important;
+}
+
+[data-theme="dark"] .text-dark {
+  color: var(--blockr-color-text-primary) !important;
+}
+
+/* Dockview dark mode overrides */
+[data-theme="dark"] .dv-dockview {
+  --dv-activegroup-visiblepanel-tab-background-color: var(--blockr-grey-100);
+  --dv-activegroup-hiddenpanel-tab-background-color: var(--blockr-grey-50);
+  --dv-inactivegroup-visiblepanel-tab-background-color: var(--blockr-grey-100);
+  --dv-inactivegroup-hiddenpanel-tab-background-color: var(--blockr-grey-50);
+  --dv-tab-divider-color: var(--blockr-grey-200);
+  --dv-activegroup-visiblepanel-tab-color: var(--blockr-color-text-primary);
+  --dv-activegroup-hiddenpanel-tab-color: var(--blockr-color-text-muted);
+  --dv-inactivegroup-visiblepanel-tab-color: var(--blockr-color-text-secondary);
+  --dv-inactivegroup-hiddenpanel-tab-color: var(--blockr-color-text-muted);
+  --dv-separator-border: var(--blockr-grey-200);
+  --dv-paneview-header-border-color: var(--blockr-grey-200);
+}
+
+[data-theme="dark"] .dv-tabs-container {
+  background-color: var(--blockr-grey-50);
+}
+
+[data-theme="dark"] .dv-default-tab {
+  color: var(--blockr-color-text-primary);
 }
