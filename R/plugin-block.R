@@ -61,7 +61,7 @@ block_card_title <- function(block, id, info) {
             "transition: border-color 0.15s ease;"
           ),
           onmouseover = paste0(
-            "this.style.borderColor='#ddd';",
+            "this.style.borderColor='var(--blockr-grey-300)';",
             "this.querySelector('.edit-icon').style.opacity='1';"
           ),
           onmouseout = paste0(
@@ -86,7 +86,7 @@ block_card_title <- function(block, id, info) {
             style = paste(
               "opacity: 0;",
               "font-size: 0.7em;",
-              "color: #bbb;",
+              "color: var(--blockr-grey-400);",
               "transition: opacity 0.15s ease;"
             )
           )
@@ -316,7 +316,7 @@ block_card_content <- function(ns, expr_ui, block_ui) {
     ".accordion-body"
   )$addAttrs(
     style = paste0(
-      "background-color: white;",
+      "background-color: var(--blockr-color-surface);",
       "border-radius: 0;",
       "margin: 0 -16px 10px -16px;",
       "padding: 16px 16px 10px 16px;",

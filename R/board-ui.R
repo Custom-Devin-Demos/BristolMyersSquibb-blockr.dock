@@ -13,6 +13,7 @@ board_ui.dock_board <- function(id, x, plugins = board_plugins(x),
   tagList(
     show_hide_block_dep(),
     blockr_dock_dep(),
+    blockr_theme_dep(),
     off_canvas(
       id = NS(id, "blocks_offcanvas"),
       title = "Offcanvas blocks",
@@ -26,6 +27,12 @@ board_ui.dock_board <- function(id, x, plugins = board_plugins(x),
       ),
       div(
         class = "blockr-navbar-right",
+        tags$button(
+          class = "blockr-theme-toggle",
+          type = "button",
+          title = "Toggle dark mode",
+          `aria-label` = "Toggle dark mode"
+        ),
         tags$button(
           class = "blockr-navbar-icon-btn",
           `data-bs-toggle` = "offcanvas",
@@ -102,5 +109,14 @@ blockr_dock_dep <- function() {
     pkg_version(),
     src = pkg_file("assets", "css"),
     stylesheet = "blockr-dock.css"
+  )
+}
+
+blockr_theme_dep <- function() {
+  htmltools::htmlDependency(
+    "blockr-theme-toggle",
+    pkg_version(),
+    src = pkg_file("assets", "js"),
+    script = "blockr-theme-toggle.js"
   )
 }
