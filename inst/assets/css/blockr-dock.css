@@ -862,8 +862,17 @@ label:has(input[type="file"]) {
    Dark mode overrides for Bootstrap/dockview
    ============================================ */
 [data-theme="dark"] body {
+  --bs-body-bg: var(--blockr-grey-50) !important;
+  --bs-body-color: var(--blockr-color-text-primary) !important;
+  background-color: var(--blockr-grey-50) !important;
+  color: var(--blockr-color-text-primary) !important;
+}
+
+html[data-theme="dark"] {
+  --bs-body-bg: var(--blockr-grey-50);
+  --bs-body-color: var(--blockr-color-text-primary);
   background-color: var(--blockr-grey-50);
-  color: var(--blockr-color-text-primary);
+  color-scheme: dark;
 }
 
 [data-theme="dark"] .offcanvas {
@@ -973,7 +982,53 @@ label:has(input[type="file"]) {
 
 [data-theme="dark"] .form-control,
 [data-theme="dark"] .form-select {
+  background-color: var(--blockr-grey-100) !important;
+  color: var(--blockr-color-text-primary) !important;
+  border-color: var(--blockr-grey-300) !important;
+}
+
+[data-theme="dark"] .form-control::placeholder {
+  color: var(--blockr-grey-400);
+}
+
+[data-theme="dark"] .selectize-control .selectize-input {
+  background-color: var(--blockr-grey-100) !important;
+  border-color: var(--blockr-grey-300) !important;
+}
+
+[data-theme="dark"] .btn-outline-secondary,
+[data-theme="dark"] .btn-outline-primary {
   color: var(--blockr-color-text-primary);
+  border-color: var(--blockr-grey-300);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover,
+[data-theme="dark"] .btn-outline-primary:hover {
+  background-color: var(--blockr-grey-200);
+}
+
+[data-theme="dark"] .page-link {
+  background-color: var(--blockr-color-surface);
+  color: var(--blockr-color-text-primary);
+  border-color: var(--blockr-grey-300);
+}
+
+[data-theme="dark"] .page-item.active .page-link {
+  background-color: var(--blockr-blue-600);
+  border-color: var(--blockr-blue-600);
+}
+
+[data-theme="dark"] .page-link:hover {
+  background-color: var(--blockr-grey-200);
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] label {
+  color: var(--blockr-color-text-primary);
+}
+
+[data-theme="dark"] .dataTables_info {
+  color: var(--blockr-color-text-muted);
 }
 
 [data-theme="dark"] .btn-close {
