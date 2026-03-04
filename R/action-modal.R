@@ -24,15 +24,14 @@ block_modal <- function(ns, board, mode = c("append", "add", "prepend")) {
   block_id_field <- paste0(mode, "_block_id")
   confirm_id <- paste0(mode, "_block_confirm")
 
-  # Always visible fields
-  visible_fields <- list(
-    block_registry_selectize(ns(selection_id)),
-    # Add block name field (visible)
-    textInput(
-      ns(name_id),
-      label = "User defined block title (can be changed after creation)",
-      placeholder = "Select block first"
-    )
+  # Block browser replaces the selectize dropdown
+  browser_ui <- block_browser_ui(ns, selection_id)
+
+  # Block name field (visible below browser)
+  name_field <- textInput(
+    ns(name_id),
+    label = "User defined block title (can be changed after creation)",
+    placeholder = "Select block first"
   )
 
   # Advanced options (collapsible)
@@ -68,14 +67,15 @@ block_modal <- function(ns, board, mode = c("append", "add", "prepend")) {
     tagList(advanced_fields)
   )
 
-  modalDialog(
+  modal <- modalDialog(
     title = title,
     size = "l",
     easyClose = TRUE,
     footer = NULL,
     tagList(
       css_modal_advanced(ns("block-advanced-options")),
-      visible_fields,
+      browser_ui,
+      name_field,
       toggle_button(
         ns("block-advanced-options"),
         ns("block-advanced-toggle")
@@ -84,10 +84,17 @@ block_modal <- function(ns, board, mode = c("append", "add", "prepend")) {
       confirm_button(
         inputId = ns(confirm_id),
         label = button_label
-      ),
-      auto_focus_script(ns(selection_id))
+      )
     )
   )
+
+  # Add custom class to modal for styling
+  modal <- tagAppendAttributes(
+    modal,
+    class = "block-browser-modal"
+  )
+
+  modal
 }
 
 link_modal <- function(ns, board, block_id) {
