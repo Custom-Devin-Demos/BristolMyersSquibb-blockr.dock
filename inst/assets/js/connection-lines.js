@@ -259,11 +259,24 @@ $(function () {
     });
   }
 
+  function normalizeLinks(links) {
+    if (!links) return [];
+    // If links is an array, use it directly
+    if (Array.isArray(links)) return links;
+    // If links is a named object (from R named list), convert to array
+    var result = [];
+    var keys = Object.keys(links);
+    for (var i = 0; i < keys.length; i++) {
+      result.push(links[keys[i]]);
+    }
+    return result;
+  }
+
   // Shiny custom message handler
   Shiny.addCustomMessageHandler(
     'update-connection-lines',
     function (message) {
-      currentLinks = message.links || [];
+      currentLinks = normalizeLinks(message.links);
       currentMeta = message.meta || {};
       ensureSvgContainer();
       setupObservers();

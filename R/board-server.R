@@ -211,6 +211,7 @@ manage_dock <- function(board, update, actions, session = get_session()) {
 
   observe({
     board$board
+    req(input[[dock_input("initialized")]])
     send_connection_lines(board$board, session)
   })
 
@@ -331,17 +332,21 @@ send_connection_lines <- function(board, session) {
   lnks <- board_links(board)
   blks <- board_blocks(board)
 
-  links_data <- lapply(as.list(lnks), function(lnk) {
+  links_list <- as.list(lnks)
+  links_data <- lapply(links_list, function(lnk) {
     list(
-      from = lnk[["from"]],
-      to = lnk[["to"]]
+      from = vctrs::field(lnk, "from"),
+      to = vctrs::field(lnk, "to")
     )
   })
 
   meta_data <- list()
-  for (blk_id in names(blks)) {
-    meta <- blks_metadata(blks[blk_id])
-    meta_data[[blk_id]] <- list(category = meta$category)
+  if (length(blks) > 0L) {
+    all_meta <- blks_metadata(blks)
+    blk_ids <- names(blks)
+    for (i in seq_along(blk_ids)) {
+      meta_data[[blk_ids[i]]] <- list(category = all_meta$category[i])
+    }
   }
 
   session$sendCustomMessage(
